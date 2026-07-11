@@ -8,7 +8,7 @@ import { useSafeReducedMotion } from "./motion";
 export function WhatsAppButton() {
   const shouldReduceMotion = useSafeReducedMotion();
   const message = encodeURIComponent(
-    "Hi Rann Voyages! I'd like to know more about your travel packages."
+    "Hi Prateek Holidayz! I'd like to know more about your travel packages."
   );
 
   return (

@@ -18,7 +18,7 @@ import { companyInfo } from "@/lib/data";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Rann Voyages is an Ahmedabad-based travel agency crafting Gujarat, pan-India, international, and corporate journeys since 2012.",
+    "Prateek Holidayz is an Ahmedabad-based travel agency crafting Gujarat, pan-India, international, and corporate journeys since 2012.",
 };
 
 const values = [
@@ -83,7 +83,7 @@ export default function AboutPage() {
             Started by two travellers who couldn&apos;t find honest itineraries
           </h2>
           <p className="mt-4 text-balance text-muted-foreground md:text-lg">
-            Rann Voyages began in 2012 out of a small office in Navrangpura, born from a simple
+            Prateek Holidayz began in 2012 out of a small office in Navrangpura, born from a simple
             frustration: too many Indian itineraries were vague, over-priced, or written by
             people who had never actually visited the places they sold.
           </p>
@@ -173,7 +173,7 @@ export default function AboutPage() {
         <Reveal delay={0.1}>
           <div className="h-80 overflow-hidden rounded-2xl border border-border shadow-soft md:h-full">
             <iframe
-              title="Rann Voyages office location map"
+              title="Prateek Holidayz office location map"
               src={`https://www.google.com/maps?q=${encodeURIComponent(companyInfo.mapsQuery)}&output=embed`}
               className="h-full w-full"
               loading="lazy"

@@ -6,7 +6,7 @@ import { DestinationsBrowser } from "@/components/DestinationsBrowser";
 export const metadata: Metadata = {
   title: "Destinations & Packages",
   description:
-    "Browse Gujarat & Kutch, pan-India, international, and pilgrimage travel packages crafted by Rann Voyages.",
+    "Browse Gujarat & Kutch, pan-India, international, and pilgrimage travel packages crafted by Prateek Holidayz.",
 };
 
 export default function DestinationsPage() {

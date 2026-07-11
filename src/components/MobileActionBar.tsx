@@ -3,7 +3,7 @@ import { companyInfo } from "@/lib/data";
 
 export function MobileActionBar() {
   const message = encodeURIComponent(
-    "Hi Rann Voyages! I'd like to know more about your travel packages."
+    "Hi Prateek Holidayz! I'd like to know more about your travel packages."
   );
 
   return (

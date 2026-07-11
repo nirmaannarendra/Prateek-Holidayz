@@ -14,7 +14,7 @@ import { companyInfo } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with Rann Voyages in Ahmedabad — call, WhatsApp, or send an enquiry and a travel consultant will respond within 24 hours.",
+    "Get in touch with Prateek Holidayz in Ahmedabad — call, WhatsApp, or send an enquiry and a travel consultant will respond within 24 hours.",
 };
 
 const contactCards = [
@@ -100,7 +100,7 @@ export default function ContactPage() {
           </div>
           <div className="h-64 overflow-hidden rounded-2xl border border-border shadow-soft">
             <iframe
-              title="Rann Voyages office location map"
+              title="Prateek Holidayz office location map"
               src={`https://www.google.com/maps?q=${encodeURIComponent(companyInfo.mapsQuery)}&output=embed`}
               className="h-full w-full"
               loading="lazy"
