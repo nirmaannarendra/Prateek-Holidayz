@@ -1,26 +1,178 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Restrained palette: one warm terracotta accent, carried at different depths,
+     on a warm near-black ink + cream editorial base. Every "brand" slot below is
+     the same hue family — success/destructive stay separate since they're
+     functional states, not decoration. */
+  --brand-primary: #c9754a;
+  --brand-primary-dark: #2b1710;
+  --brand-primary-light: #e3a373;
+  --brand-accent: #c9754a;
+  --brand-accent-dark: #a8582f;
+  --brand-gold: #c9754a;
+
+  --brand-background: #100e0c;
+  --brand-surface: #1c1815;
+  --brand-surface-alt: #171310;
+  --brand-foreground: #f5f1e8;
+  --brand-muted-foreground: #a89a89;
+  --brand-border: #3a322b;
+
+  --brand-success: #22c55e;
+  --brand-destructive: #f87171;
+
+  --brand-shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --brand-shadow-lifted: 0 4px 10px rgba(0, 0, 0, 0.45), 0 20px 48px rgba(0, 0, 0, 0.5);
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--brand-primary);
+  --color-primary-dark: var(--brand-primary-dark);
+  --color-primary-light: var(--brand-primary-light);
+  --color-accent: var(--brand-accent);
+  --color-accent-dark: var(--brand-accent-dark);
+  --color-gold: var(--brand-gold);
+  --color-background: var(--brand-background);
+  --color-surface: var(--brand-surface);
+  --color-surface-alt: var(--brand-surface-alt);
+  --color-foreground: var(--brand-foreground);
+  --color-muted-foreground: var(--brand-muted-foreground);
+  --color-border: var(--brand-border);
+  --color-success: var(--brand-success);
+  --color-destructive: var(--brand-destructive);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+
+  --shadow-soft: var(--brand-shadow-soft);
+  --shadow-lifted: var(--brand-shadow-lifted);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display), Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.container-page {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: 2rem;
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.img-grade {
+  filter: saturate(0.82) contrast(1.14) sepia(0.16) hue-rotate(-6deg) brightness(0.93);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1.5px;
+  width: 0%;
+  background: currentColor;
+  transition: width var(--duration-base) var(--ease-out-soft);
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+.input-field {
+  min-height: 2.75rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.9375rem;
+  color: var(--color-foreground);
+  transition: border-color var(--duration-base) var(--ease-out-soft),
+    box-shadow var(--duration-base) var(--ease-out-soft);
+}
+
+.input-field::placeholder {
+  color: var(--color-muted-foreground);
+}
+
+.input-field:focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(201, 117, 74, 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
