@@ -2,6 +2,9 @@ import { PhoneIcon, WhatsappLogoIcon } from "@phosphor-icons/react/dist/ssr";
 import { companyInfo } from "@/lib/data";
 
 export function MobileActionBar() {
+  // WhatsApp text is kept generic here; the package detail page wraps content
+  // in PackageProvider which the client-side WhatsApp link reads via context.
+  // MobileActionBar is a Server Component so it uses the generic message.
   const message = encodeURIComponent(
     "Hi Prateek Holidayz! I'd like to know more about your travel packages."
   );

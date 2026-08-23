@@ -98,14 +98,27 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
-          <div className="h-64 overflow-hidden rounded-2xl border border-border shadow-soft">
-            <iframe
-              title="Prateek Holidayz office location map"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(companyInfo.mapsQuery)}&output=embed`}
-              className="h-full w-full"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <div className="flex flex-col gap-2">
+            <div className="h-64 overflow-hidden rounded-2xl border border-border shadow-soft">
+              <iframe
+                title="Prateek Holidayz office location map"
+                src={`https://www.google.com/maps?q=${encodeURIComponent(companyInfo.mapsQuery)}&output=embed`}
+                className="h-full w-full"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Unable to view map?{" "}
+              <a
+                href={`https://maps.google.com/?q=${encodeURIComponent(companyInfo.mapsQuery)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent underline"
+              >
+                Open location in Google Maps
+              </a>
+            </p>
           </div>
         </Reveal>
       </section>

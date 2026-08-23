@@ -21,6 +21,15 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
   const solid = scrolled || menuOpen;
 
   return (
@@ -75,6 +84,7 @@ export function Navbar() {
           type="button"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
+          aria-controls="mobile-nav"
           onClick={() => setMenuOpen((v) => !v)}
           className={`cursor-pointer p-2 lg:hidden ${solid ? "text-primary" : "text-white"}`}
         >
@@ -85,6 +95,7 @@ export function Navbar() {
       <AnimatePresence>
         {menuOpen ? (
           <motion.nav
+            id="mobile-nav"
             key={shouldReduceMotion ? "reduced" : "motion"}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}

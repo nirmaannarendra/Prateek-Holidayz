@@ -17,9 +17,11 @@ const eventTypes = [
 export function InquiryForm({
   variant = "general",
   defaultDestination,
+  packageTitle,
 }: {
   variant?: Variant;
   defaultDestination?: string;
+  packageTitle?: string;
 }) {
   const formId = useId();
   const [status, setStatus] = useState<Status>("idle");
@@ -31,6 +33,13 @@ export function InquiryForm({
     setErrorMessage("");
 
     const form = event.currentTarget;
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      setStatus("idle");
+      return;
+    }
+
     const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
 
@@ -41,13 +50,22 @@ export function InquiryForm({
         body: JSON.stringify({ variant, ...payload }),
       });
 
-      if (!res.ok) throw new Error("Request failed");
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(
+          typeof data?.error === "string" ? data.error : "Request failed"
+        );
+      }
 
       setStatus("success");
       form.reset();
-    } catch {
+    } catch (error) {
       setStatus("error");
-      setErrorMessage("Something went wrong. Please try WhatsApp or call us directly.");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try WhatsApp or call us directly."
+      );
     }
   }
 
@@ -77,7 +95,10 @@ export function InquiryForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      {packageTitle ? (
+        <input type="hidden" name="packageTitle" value={packageTitle} />
+      ) : null}
       <div className="grid gap-5 sm:grid-cols-2">
         <Field id={`${formId}-name`} label="Full Name" required>
           <input
@@ -186,15 +207,17 @@ export function InquiryForm({
             </Field>
           </>
         ) : (
-          <Field id={`${formId}-dates`} label="Preferred Travel Dates">
-            <input
-              id={`${formId}-dates`}
-              name="travelDates"
-              type="text"
-              className="input-field"
-              placeholder="e.g. Dec 20 - Dec 25"
-            />
-          </Field>
+          <div className="sm:col-span-2">
+            <Field id={`${formId}-dates`} label="Preferred Travel Dates">
+              <input
+                id={`${formId}-dates`}
+                name="travelDates"
+                type="text"
+                className="input-field"
+                placeholder="e.g. Dec 20 - Dec 25"
+              />
+            </Field>
+          </div>
         )}
       </div>
 

@@ -4,12 +4,15 @@ import { motion } from "framer-motion";
 import { WhatsappLogoIcon } from "@phosphor-icons/react";
 import { companyInfo } from "@/lib/data";
 import { useSafeReducedMotion } from "./motion";
+import { usePackageContext } from "./PackageContext";
 
 export function WhatsAppButton() {
+  const { packageTitle } = usePackageContext();
   const shouldReduceMotion = useSafeReducedMotion();
-  const message = encodeURIComponent(
-    "Hi Prateek Holidayz! I'd like to know more about your travel packages."
-  );
+  const text = packageTitle
+    ? `Hi Prateek Holidayz! I'd like to know more about the "${packageTitle}" package.`
+    : "Hi Prateek Holidayz! I'd like to know more about your travel packages.";
+  const message = encodeURIComponent(text);
 
   return (
     <motion.a
@@ -17,7 +20,11 @@ export function WhatsAppButton() {
       href={`https://wa.me/${companyInfo.whatsapp}?text=${message}`}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with us on WhatsApp"
+      aria-label={
+        packageTitle
+          ? `Chat with us on WhatsApp about ${packageTitle}`
+          : "Chat with us on WhatsApp"
+      }
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{

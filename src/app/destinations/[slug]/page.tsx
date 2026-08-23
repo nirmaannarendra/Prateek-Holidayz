@@ -14,6 +14,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { PackageCard } from "@/components/PackageCard";
 import { InquiryForm } from "@/components/InquiryForm";
 import { PhotoGrain } from "@/components/PhotoGrain";
+import { PackageProvider } from "@/components/PackageContext";
 import { categoryLabels, companyInfo, packages } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -30,6 +31,7 @@ export async function generateMetadata(
   return {
     title: pkg.title,
     description: pkg.tagline,
+    alternates: { canonical: `https://prateekholidayz.in/destinations/${pkg.slug}` },
     openGraph: {
       title: `${pkg.title} | ${companyInfo.name}`,
       description: pkg.tagline,
@@ -49,7 +51,7 @@ export default async function PackageDetailPage(props: PageProps<"/destinations/
     .slice(0, 3);
 
   return (
-    <>
+    <PackageProvider packageTitle={pkg.title}>
       <section className="relative flex min-h-[55vh] items-end overflow-hidden">
         <Image
           src={pkg.image}
@@ -192,7 +194,7 @@ export default async function PackageDetailPage(props: PageProps<"/destinations/
               <p className="mb-4 font-display text-base font-semibold text-foreground">
                 Enquire about this trip
               </p>
-              <InquiryForm variant="general" defaultDestination={pkg.category} />
+              <InquiryForm variant="general" defaultDestination={pkg.category} packageTitle={pkg.title} />
             </div>
           </div>
         </Reveal>
@@ -216,6 +218,6 @@ export default async function PackageDetailPage(props: PageProps<"/destinations/
           </div>
         </section>
       ) : null}
-    </>
+    </PackageProvider>
   );
 }

@@ -11,6 +11,9 @@ const baseUrl = "https://prateekholidayz.in";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
+  alternates: {
+    canonical: baseUrl,
+  },
   title: {
     default: `${companyInfo.name} | Pan-India & International Travel Agency`,
     template: `%s | ${companyInfo.name}`,

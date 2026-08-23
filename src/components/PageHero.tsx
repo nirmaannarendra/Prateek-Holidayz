@@ -8,12 +8,14 @@ export function PageHero({
   description,
   image,
   imageAlt,
+  priority = true,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   image: string;
   imageAlt: string;
+  priority?: boolean;
 }) {
   return (
     <section className="relative flex min-h-[60vh] items-end overflow-hidden">
@@ -21,7 +23,7 @@ export function PageHero({
         src={image}
         alt={imageAlt}
         fill
-        priority
+        priority={priority}
         sizes="100vw"
         className="img-grade object-cover"
       />

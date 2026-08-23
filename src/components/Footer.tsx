@@ -1,11 +1,8 @@
 import Link from "next/link";
 import {
   EnvelopeSimpleIcon,
-  FacebookLogoIcon,
-  InstagramLogoIcon,
   MapPinIcon,
   PhoneIcon,
-  YoutubeLogoIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { categoryLabels, companyInfo, navLinks } from "@/lib/data";
 
@@ -18,22 +15,6 @@ export function Footer() {
         <div className="md:col-span-1">
           <p className="font-display text-xl font-semibold text-white">{companyInfo.name}</p>
           <p className="mt-3 text-sm leading-relaxed text-white/65">{companyInfo.tagline}</p>
-          <div className="mt-5 flex gap-3">
-            {[
-              { Icon: FacebookLogoIcon, label: "Follow us on Facebook" },
-              { Icon: InstagramLogoIcon, label: "Follow us on Instagram" },
-              { Icon: YoutubeLogoIcon, label: "Subscribe on YouTube" },
-            ].map(({ Icon, label }) => (
-              <a
-                key={label}
-                href="#"
-                aria-label={label}
-                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-accent"
-              >
-                <Icon size={18} className="text-white" />
-              </a>
-            ))}
-          </div>
         </div>
 
         <div>
@@ -91,7 +72,23 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/50 md:flex-row">
           <p>&copy; {year} {companyInfo.name}. All rights reserved.</p>
-          <p>Ahmedabad, Gujarat &middot; IATA/TAAI Affiliated Travel Agency</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+            <p>Ahmedabad, Gujarat &middot; IATA/TAAI Affiliated Travel Agency</p>
+            <span aria-hidden className="hidden md:inline">·</span>
+            <nav aria-label="Legal" className="flex items-center gap-3">
+              <Link href="/privacy-policy" className="hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <span aria-hidden>·</span>
+              <Link href="/terms-of-service" className="hover:text-white transition-colors">
+                Terms
+              </Link>
+              <span aria-hidden>·</span>
+              <Link href="/cancellation-policy" className="hover:text-white transition-colors">
+                Cancellation Policy
+              </Link>
+            </nav>
+          </div>
         </div>
       </div>
     </footer>

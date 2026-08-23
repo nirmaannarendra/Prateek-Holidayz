@@ -171,14 +171,27 @@ export default function AboutPage() {
           </Link>
         </Reveal>
         <Reveal delay={0.1}>
-          <div className="h-80 overflow-hidden rounded-2xl border border-border shadow-soft md:h-full">
-            <iframe
-              title="Prateek Holidayz office location map"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(companyInfo.mapsQuery)}&output=embed`}
-              className="h-full w-full"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <div className="flex flex-col gap-2">
+            <div className="h-80 overflow-hidden rounded-2xl border border-border shadow-soft md:h-full">
+              <iframe
+                title="Prateek Holidayz office location map"
+                src={`https://www.google.com/maps?q=${encodeURIComponent(companyInfo.mapsQuery)}&output=embed`}
+                className="h-full w-full"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Unable to view map?{" "}
+              <a
+                href={`https://maps.google.com/?q=${encodeURIComponent(companyInfo.mapsQuery)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent underline"
+              >
+                Open location in Google Maps
+              </a>
+            </p>
           </div>
         </Reveal>
       </section>
